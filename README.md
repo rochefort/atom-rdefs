@@ -6,6 +6,9 @@ cf. [knsmr/rdefs](https://github.com/knsmr/rdefs)
 
 ![A screenshot of your spankin' package](https://raw.githubusercontent.com/rochefort/atom-rdefs/master/atom-rdefs_exmple.png)
 
+## Preparation
+    gem install rdefs
+
 ## Usage
 >- `Ctrl-Cmd-A`
 
