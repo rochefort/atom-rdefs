@@ -1,7 +1,7 @@
 {
   "name": "atom-rdefs",
   "main": "./lib/atom-rdefs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Rdefs for atom",
   "activationEvents": [
     "atom-rdefs:show"
