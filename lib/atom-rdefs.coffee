@@ -18,7 +18,9 @@ module.exports =
       command: 'rdefs'
       args: [uri]
       stdout: (data) -> result += data
-      stderr: (data) -> showStatusView(data)
+      stderr: (data) ->
+        showStatusView(data)
+        console.log('atom-rdefs: ' + msg)
       exit: (code) -> prepFile result if code is 0
 
 prepFile = (text) ->
@@ -33,5 +35,4 @@ showFile = ->
     .open(resultFilePath, split: 'right', activatePane: true)
 
 showStatusView = (msg) ->
-  console.log('atom-rdefs: ' + msg)
   new StatusView(type: 'error', message: msg)
