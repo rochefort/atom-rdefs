@@ -2,7 +2,7 @@
   "name": "atom-rdefs",
   "main": "./lib/atom-rdefs",
   "version": "0.1.2",
-  "description": "Rdefs for atom",
+  "description": "Rdefs is Ruby syntactic analysis tools for atom",
   "activationEvents": [
     "atom-rdefs:show"
   ],
