@@ -1,7 +1,7 @@
 {
   "name": "atom-rdefs",
   "main": "./lib/atom-rdefs",
-  "version": "0.1.4",
+  "version": "0.1.3",
   "description": "`atom-rdefs` is a wrapper of Rdef that is Ruby syntactic analysis tools",
   "activationCommands": {
     "atom-text-editor": [
