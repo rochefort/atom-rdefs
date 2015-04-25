@@ -8,11 +8,11 @@ resultFilePath = Path.join Os.tmpDir(), 'atom-rdefs-result'
 
 module.exports =
   activate: (state)->
-    atom.workspaceView.command "atom-rdefs:show", => @show()
+    atom.commands.add 'atom-workspace', 'atom-rdefs:show', => @show()
 
   show: ->
-    editor = atom.workspace.activePaneItem
-    uri = editor.getUri()
+    editor = atom.workspace.getActivePaneItem()
+    uri = editor.getURI()
     result = ''
     new BufferedProcess
       command: 'rdefs'
@@ -28,7 +28,7 @@ prepFile = (text) ->
     fs.writeFileSync resultFilePath, text, flag: 'w+'
     showFile()
   else
-    showStatusView('Nothing to show.')
+    showStatusView('atom-rdefs: Nothing to show.')
 
 showFile = ->
   atom.workspace

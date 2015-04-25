@@ -1,21 +1,19 @@
-{Subscriber} = require 'emissary'
-{$, View} = require 'atom'
+{$, View} = require 'atom-space-pen-views'
 
 module.exports =
   class AtomRdefsView extends View
-    Subscriber.includeInto(this)
-
     @content = (params) ->
-      @div class: 'atom-rdefs overlay from-top', =>
+      @div class: 'atom-rdefs', =>
         @div class: "#{params.type} message", params.message
 
     initialize: ->
-      @subscribe $(window), 'core:cancel', => @detach()
-      atom.workspaceView.append(this)
+      @panel ?= atom.workspace.addBottomPanel(item: this)
       setTimeout =>
-        @detach()
-      , 5000
+        @destroy()
+      , 3000
 
-    detach: ->
-      super
-      @unsubscribe()
+    cancelled: ->
+      @hide()
+
+    destroy: ->
+      @panel.destroy()

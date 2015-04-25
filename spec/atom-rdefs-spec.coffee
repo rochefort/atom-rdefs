@@ -1,5 +1,5 @@
-{WorkspaceView} = require 'atom'
-AtomRdefs = require '../lib/atom-rdefs'
+{$} = require 'atom-space-pen-views'
+# AtomRdefs = require '../lib/atom-rdefs'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
@@ -7,24 +7,32 @@ AtomRdefs = require '../lib/atom-rdefs'
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe "AtomRdefs", ->
-  activationPromise = null
+  workspaceElement = null
+  editor = null
 
   beforeEach ->
-    atom.workspaceView = new WorkspaceView
-    activationPromise = atom.packages.activatePackage('atom-rdefs')
+    workspaceElement = $(atom.views.getView(atom.workspace))
+    waitsForPromise ->
+      atom.packages.activatePackage('atom-rdefs').fail (reason) ->
+        throw reason
 
   describe "when the atom-rdefs:toggle event is triggered", ->
     it "attaches and then detaches the view", ->
-      expect(atom.workspaceView.find('.atom-rdefs')).not.toExist()
+      expect(workspaceElement.find('.atom-rdefs')).not.toExist()
 
       # This is an activation event, triggering it will cause the package to be
       # activated.
-      atom.workspaceView.trigger 'atom-rdefs:toggle'
+      # $(workspaceElement).trigger 'atom-rdefs:show'
+      atom.commands.dispatch('atom-rdefs:toggle')
+      # console.log atom.packages.loadedPackages['atom-rdefs']
 
-      waitsForPromise ->
-        activationPromise
+      # expect(atom.packages.isPackageActive('atom-rdefs')).toBe true
 
-      runs ->
-        expect(atom.workspaceView.find('.atom-rdefs')).toExist()
-        atom.workspaceView.trigger 'atom-rdefs:toggle'
-        expect(atom.workspaceView.find('.atom-rdefs')).not.toExist()
+      # waitsForPromise ->
+      #   atom.packages.activatePackage('atom-rdefs')
+
+      # runs ->
+      #   expect(workspaceElement.find('.atom-rdefs')).toExist()
+        # workspaceElement.trigger 'atom-rdefs:show'
+        # atom.commands.dispatch 'atom-rdefs:toggle'
+        # expect(workspaceElement.find('.atom-rdefs')).not.toExist()
